@@ -548,7 +548,7 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
         {/* Center: Interactive Shutter Trigger Button */}
         <button
           onClick={handleCapture}
-          className="relative inline-flex items-center justify-center focus:outline-none active:scale-90 transition-transform cursor-pointer"
+          className="relative -translate-y-4 inline-flex items-center justify-center focus:outline-none active:scale-90 transition-transform cursor-pointer"
           style={{ animation: isCameraLoading ? "none" : "camera-shutter-pulse 2.5s infinite" }}
           disabled={isCameraLoading}
           id="btn-capture-shutter"
