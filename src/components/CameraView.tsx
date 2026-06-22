@@ -481,9 +481,9 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
       </div>
 
       {/* Real-time Filter Selector Slider */}
-      <div className="w-full bg-[#111216]/90 border-t border-b border-white/5 py-1.5 relative z-10">
+      <div className="w-full bg-[#111216]/90 border-t border-b border-white/5 py-1 relative z-10">
         <div className="max-w-md mx-auto flex items-center gap-3 overflow-x-auto px-6 scrollbar-none snap-x">
-          <div className="flex gap-3.5 pb-0">
+          <div className="flex gap-3 pb-0">
             {CAMERA_FILTERS.map((filter) => (
               <button
                 key={filter.id}
@@ -492,9 +492,9 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
               >
                 {/* Visual filter thumbnail preview ball */}
                 <div 
-                  className={`w-11 h-11 rounded-full border-2 transition-all overflow-hidden ${
+                  className={`w-9 h-9 rounded-full border-2 transition-all overflow-hidden ${
                     selectedFilter.id === filter.id 
-                      ? "border-rose-500 scale-105 shadow-lg shadow-rose-500/20" 
+                      ? "border-rose-500 scale-105 shadow-lg shadow-rose-500/10" 
                       : "border-white/20 group-hover:border-white/50"
                   }`}
                 >
@@ -506,7 +506,7 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
                     }}
                   />
                 </div>
-                <span className={`text-[10px] font-medium tracking-wide transition-all ${
+                <span className={`text-[9px] font-medium tracking-wide transition-all ${
                   selectedFilter.id === filter.id ? "text-rose-400 font-semibold" : "text-slate-400"
                 }`}>
                   {filter.name}
@@ -548,7 +548,7 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
         {/* Center: Interactive Shutter Trigger Button */}
         <button
           onClick={handleCapture}
-          className="relative -translate-y-4 inline-flex items-center justify-center focus:outline-none active:scale-90 transition-transform cursor-pointer"
+          className="relative -translate-y-6 inline-flex items-center justify-center focus:outline-none active:scale-90 transition-transform cursor-pointer"
           style={{ animation: isCameraLoading ? "none" : "camera-shutter-pulse 2.5s infinite" }}
           disabled={isCameraLoading}
           id="btn-capture-shutter"
