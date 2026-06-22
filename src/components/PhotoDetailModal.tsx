@@ -124,6 +124,44 @@ export function PhotoDetailModal({
     }
   };
 
+  // Ultra-automated direct action requested by the user
+  const handleAutomaticSend = async () => {
+    setIsSharingNative(true);
+    setShareFeedback(null);
+    
+    // 1. Auto-copy a beautiful suggested caption
+    const randomCaption = SUGGESTED_CAPTIONS[Math.floor(Math.random() * SUGGESTED_CAPTIONS.length)];
+    try {
+      await navigator.clipboard.writeText(randomCaption);
+    } catch (e) {
+      console.log("Could not auto-copy caption");
+    }
+
+    try {
+      const file = new File([photo.blob], `photo-${photo.id}.jpg`, { type: "image/jpeg" });
+      
+      // 2. Try the modern native sharing flow
+      if (typeof navigator !== "undefined" && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "Câmera e Galeria App",
+          text: randomCaption,
+        });
+        setShareFeedback("Sucesso! Legenda copiada: \"" + randomCaption + "\"");
+      } else {
+        // Fallback: download instantly + open instagram
+        throw new Error("Post direto não suportado");
+      }
+    } catch (err) {
+      // Manual/Desktop Fallback: Download the file and open Instagram automatically
+      handleDownload();
+      window.open("https://instagram.com", "_blank");
+      setShareFeedback("Foto baixada e legenda copiada! O Instagram foi aberto em outra aba.");
+    } finally {
+      setIsSharingNative(false);
+    }
+  };
+
   // Checks block compatibility
   const isWebShareSupported = typeof navigator !== "undefined" && !!navigator.share;
 
@@ -198,9 +236,9 @@ export function PhotoDetailModal({
           
           <div>
             {/* Desktop Close button */}
-            <div className="hidden md:flex justify-between items-center mb-6">
-              <h2 className="font-display font-bold text-lg tracking-wide text-white flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-rose-500" />
+            <div className="hidden md:flex justify-between items-center mb-5">
+              <h2 className="font-display font-bold text-base tracking-wide text-white flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-rose-500" />
                 POSTAR NO INSTAGRAM
               </h2>
               <button 
@@ -215,8 +253,36 @@ export function PhotoDetailModal({
             <div className="md:hidden mb-4">
               <h2 className="font-display font-bold text-base tracking-wide text-white flex items-center gap-1.5">
                 <Instagram className="w-4 h-4 text-rose-500" />
-                Opções de Compartilhamento
+                Postar no Instagram
               </h2>
+            </div>
+
+            {/* SUPER AUTOMATIC BIG BUTTON */}
+            <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-rose-500/10 to-purple-500/10 border border-rose-500/20 text-center space-y-3 shadow-lg shadow-rose-950/20">
+              <span className="inline-block px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase text-rose-400 bg-rose-400/10 rounded-full">
+                ⚡ Recurso de 1-Clique
+              </span>
+              <h3 className="text-xs font-semibold text-white tracking-wide">
+                Enviar Automático
+              </h3>
+              <p className="text-[10px] text-slate-400 leading-normal">
+                Copia a legenda para a sua área de transferência, baixa/prepara a imagem e abre o Instagram em segundos!
+              </p>
+              
+              <button
+                onClick={handleAutomaticSend}
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-rose-500 via-red-500 to-amber-500 hover:opacity-95 text-white text-xs font-bold shadow-lg shadow-rose-500/20 active:scale-95 transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer"
+                id="btn-automatic-send-action"
+              >
+                <Instagram className="w-4 h-4 animate-pulse" />
+                ENVIAR AGORA!
+              </button>
+              
+              {shareFeedback && (
+                <p className="text-[10px] text-amber-300 font-medium bg-black/30 p-2 rounded-lg leading-normal">
+                  {shareFeedback}
+                </p>
+              )}
             </div>
 
             {/* Action Selection Tabs */}
@@ -230,7 +296,7 @@ export function PhotoDetailModal({
                 }`}
               >
                 <Instagram className="w-3.5 h-3.5 text-rose-400" />
-                Guia Instagram
+                Guia Manual
               </button>
               <button
                 onClick={() => setActiveTab("native")}
@@ -241,7 +307,7 @@ export function PhotoDetailModal({
                 }`}
               >
                 <Share2 className="w-3.5 h-3.5 text-rose-400" />
-                Envio Direto
+                Opções Extras
               </button>
             </div>
 
