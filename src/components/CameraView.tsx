@@ -41,7 +41,7 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
   
   // Custom camera options
   const [selectedFilter, setSelectedFilter] = useState<CameraFilter>(CAMERA_FILTERS[0]);
-  const [aspectRatio, setAspectRatio] = useState<AspectRatioType>("4:3");
+  const [aspectRatio, setAspectRatio] = useState<AspectRatioType>("16:9");
   const [showGrid, setShowGrid] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
