@@ -523,7 +523,7 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
         {/* Left Side: Recent taken photo redirect */}
         <button 
           onClick={onOpenGallery}
-          className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all text-slate-300 relative group -translate-y-6"
+          className="w-18 h-18 rounded-2xl bg-white/5 border border-white/10 overflow-hidden flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all text-slate-300 relative group -translate-y-6"
           title="Abrir Galeria"
           id="btn-goto-gallery"
         >
