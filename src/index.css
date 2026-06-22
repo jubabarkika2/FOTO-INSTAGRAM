@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Outfit", var(--font-sans);
+}
+
+@layer base {
+  body {
+    @apply bg-[#0b0c10] text-[#f5f6f9] antialiased min-h-screen overflow-x-hidden selection:bg-[#fb7185] selection:text-[#0b0c10];
+  }
+}
+
+/* Custom visual pulse for recording/camera shutter buttons */
+@keyframes camera-shutter-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(251, 113, 133, 0);
+  }
+}
+
+.shutter-glow {
+  box-shadow: 0 8px 32px rgba(251, 113, 133, 0.3);
+}
+
+/* Glassmorphism utility card styles */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.45);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth custom scrollbars for gallery browsing */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 12, 16, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 113, 133, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 113, 133, 0.6);
+}
+

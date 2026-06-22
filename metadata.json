@@ -1,0 +1,10 @@
+{
+  "name": "Câmera e Galeria",
+  "description": "Um aplicativo de câmera que permite capturar fotos, salvá-las em uma galeria local e compartilhá-las diretamente no Instagram e outras redes sociais.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
