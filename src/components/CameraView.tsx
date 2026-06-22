@@ -481,20 +481,20 @@ export function CameraView({ onPhotoCaptured, latestPhotoUrl, onOpenGallery }: C
       </div>
 
       {/* Real-time Filter Selector Slider */}
-      <div className="w-full bg-[#111216]/90 border-t border-b border-white/5 py-3 relative z-10">
+      <div className="w-full bg-[#111216]/90 border-t border-b border-white/5 py-1.5 relative z-10">
         <div className="max-w-md mx-auto flex items-center gap-3 overflow-x-auto px-6 scrollbar-none snap-x">
-          <div className="flex gap-3.5 pb-1">
+          <div className="flex gap-3.5 pb-0">
             {CAMERA_FILTERS.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setSelectedFilter(filter)}
-                className="flex flex-col items-center gap-1.5 focus:outline-none cursor-pointer group snap-center"
+                className="flex flex-col items-center gap-0.5 focus:outline-none cursor-pointer group snap-center"
               >
                 {/* Visual filter thumbnail preview ball */}
                 <div 
                   className={`w-11 h-11 rounded-full border-2 transition-all overflow-hidden ${
                     selectedFilter.id === filter.id 
-                      ? "border-rose-500 scale-110 shadow-lg shadow-rose-500/20" 
+                      ? "border-rose-500 scale-105 shadow-lg shadow-rose-500/20" 
                       : "border-white/20 group-hover:border-white/50"
                   }`}
                 >
